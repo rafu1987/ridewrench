@@ -353,11 +353,14 @@
 <div class="container">
     <footer class="py-3 my-2">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item">
-                <a href="{{ url('/dashboard') }}" class="nav-link px-2 text-body-secondary">
-                    {{ e(__('nav.dashboard')) }}
-                </a>
-            </li>
+            @auth
+                <li class="nav-item">
+                    <a href="{{ url('/dashboard') }}" class="nav-link px-2 text-body-secondary">
+                        {{ e(__('nav.dashboard')) }}
+                    </a>
+                </li>
+            @endauth
+
             <li class="nav-item">
                 <a href="{{ url('/faq') }}" class="nav-link px-2 text-body-secondary">
                     {{ e(__('footer.faq')) }}
