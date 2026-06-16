@@ -1,4 +1,4 @@
-<p align="center"><a href="https://www.ridewrench.de" target="_blank"><img src="https://www.ridewrench.de/images/logo/logo.svg" width="400" alt="RideWrench Logo"></a></p>
+<p align="center"><a href="https://www.ridewrench.de" target="_blank"><img src="https://www.ridewrench.de/images/logos/logo-grey.svg" width="400" alt="RideWrench Logo"></a></p>
 
 README will follow
 
