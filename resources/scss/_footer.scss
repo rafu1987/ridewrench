@@ -1,0 +1,11 @@
+.footer {
+  .nav {
+    &-link {
+      @include states('&.active') {
+        color: var(--rw-nav-link-hover-color);
+      }
+
+      color: var(--bs-secondary);
+    }
+  }
+}

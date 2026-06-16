@@ -391,39 +391,39 @@
 </main>
 
 <div class="container">
-    <footer class="py-3 my-2">
+    <footer class="footer py-3 my-2">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             @auth
                 <li class="nav-item">
-                    <a href="{{ url('/dashboard') }}" class="nav-link px-2 text-body-secondary">
+                    <a href="{{ url('/dashboard') }}" class="nav-link {{ $active('/dashboard') }} px-2">
                         {{ e(__('nav.dashboard')) }}
                     </a>
                 </li>
             @endauth
 
             <li class="nav-item">
-                <a href="{{ url('/faq') }}" class="nav-link px-2 text-body-secondary">
+                <a href="{{ url('/faq') }}" class="nav-link {{ $active('/faq') }} px-2">
                     {{ e(__('footer.faq')) }}
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/feedback') }}" class="nav-link px-2 text-body-secondary">
+                <a href="{{ url('/feedback') }}" class="nav-link {{ $active('/feedback') }} px-2">
                     {{ e(__('footer.feedback')) }}
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/legal-notice') }}" class="nav-link px-2 text-body-secondary">
+                <a href="{{ url('/legal-notice') }}" class="nav-link {{ $active('/legal-notice') }} px-2">
                     {{ e(__('footer.legalNotice')) }}
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/privacy') }}" class="nav-link px-2 text-body-secondary">
+                <a href="{{ url('/privacy') }}" class="nav-link {{ $active('/privacy') }} px-2">
                     {{ e(__('footer.privacy')) }}
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="https://github.com/rafu1987/ridewrench" target="_blank" class="nav-link px-2 text-body-secondary">
+                <a href="https://github.com/rafu1987/ridewrench" target="_blank" class="nav-link px-2">
                     <i class="fa-brands fa-github"></i>
                 </a>
             </li>
