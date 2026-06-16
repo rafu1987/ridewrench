@@ -27,11 +27,7 @@
     "predeploy": "yarn quality && composer dump-autoload -o",
     "deploy:assets:dry": "rsync -avzn --delete public/build/ ridewrench-live:/www/htdocs/w021a6f5/ridewrench.de/public/build/",
     "deploy:assets": "rsync -avz --delete public/build/ ridewrench-live:/www/htdocs/w021a6f5/ridewrench.de/public/build/",
-    "deploy:assets:live": "yarn quality && yarn build && yarn deploy:assets",
-    "deploy:live:dry": "rsync -avzn --delete --exclude='.env' --exclude='.env.dev' --exclude='.env.live' --exclude='node_modules' --exclude='vendor' --exclude='storage/logs' --exclude='storage/framework/cache' --exclude='storage/framework/sessions' --exclude='storage/framework/views' ./ ridewrench-live:/www/htdocs/w021a6f5/ridewrench.de/",
-    "deploy:live": "rsync -avz --delete --exclude='.env' --exclude='.env.dev' --exclude='.env.live' --exclude='node_modules' --exclude='vendor' --exclude='storage/logs' --exclude='storage/framework/cache' --exclude='storage/framework/sessions' --exclude='storage/framework/views' ./ ridewrench-live:/www/htdocs/w021a6f5/ridewrench.de/",
-    "deploy:live:finalize": "ssh ridewrench-live 'cd /www/htdocs/w021a6f5/ridewrench.de && composer install --no-dev --optimize-autoloader && php artisan migrate --force && php artisan optimize:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache'",
-    "deploy:live:full": "yarn quality && yarn build && yarn deploy:live && yarn deploy:live:finalize"
+    "deploy:assets:live": "yarn quality && yarn build && yarn deploy:assets"
   },
   "devDependencies": {
     "@prettier/plugin-php": "^0.25.0",

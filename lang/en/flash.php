@@ -46,4 +46,8 @@ return [
     'twoFactorDisabled' => 'Two-factor authentication disabled.',
     'twoFactorEnabled' => 'Two-factor authentication enabled.',
     'twoFactorInvalid' => 'The authentication code is invalid.',
+    'two-factor-authentication-enabled' => 'Two-factor authentication has been enabled.',
+    'two-factor-authentication-disabled' => 'Two-factor authentication has been disabled.',
+    'two-factor-authentication-confirmed' => 'Two-factor authentication has been confirmed.',
+    'recovery-codes-generated' => 'New recovery codes have been generated.',
 ];

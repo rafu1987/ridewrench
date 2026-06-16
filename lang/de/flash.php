@@ -46,4 +46,8 @@ return [
     'twoFactorDisabled' => 'Zwei-Faktor-Authentifizierung deaktiviert.',
     'twoFactorEnabled' => 'Zwei-Faktor-Authentifizierung aktiviert.',
     'twoFactorInvalid' => 'Der Authenticator-Code ist ungültig.',
+    'two-factor-authentication-enabled' => 'Zwei-Faktor-Authentifizierung wurde aktiviert.',
+    'two-factor-authentication-disabled' => 'Zwei-Faktor-Authentifizierung wurde deaktiviert.',
+    'two-factor-authentication-confirmed' => 'Zwei-Faktor-Authentifizierung wurde bestätigt.',
+    'recovery-codes-generated' => 'Neue Wiederherstellungscodes wurden erstellt.',
 ];

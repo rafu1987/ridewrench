@@ -46,4 +46,8 @@ return [
     'twoFactorDisabled' => 'Autenticación de dos factores desactivada.',
     'twoFactorEnabled' => 'Autenticación de dos factores activada.',
     'twoFactorInvalid' => 'El código de autenticación no es válido.',
+    'two-factor-authentication-enabled' => 'La autenticación de dos factores se ha activado.',
+    'two-factor-authentication-disabled' => 'La autenticación de dos factores se ha desactivado.',
+    'two-factor-authentication-confirmed' => 'La autenticación de dos factores se ha confirmado.',
+    'recovery-codes-generated' => 'Se han generado nuevos códigos de recuperación.',
 ];

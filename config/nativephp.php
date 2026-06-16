@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | App Version Name
@@ -156,14 +155,7 @@ return [
     |
     */
 
-    'cleanup_env_keys' => [
-        'AWS_*',
-        'GITHUB_*',
-        'DO_SPACES_*',
-        '*_SECRET',
-        'DB_PASSWORD',
-        'DB_USERNAME',
-    ],
+    'cleanup_env_keys' => ['AWS_*', 'GITHUB_*', 'DO_SPACES_*', '*_SECRET', 'DB_PASSWORD', 'DB_USERNAME'],
 
     /*
     |--------------------------------------------------------------------------
@@ -327,12 +319,7 @@ return [
         'open_browser' => env('NATIVEPHP_OPEN_BROWSER', false),
 
         // Watch these directories for changes
-        'watch_paths' => [
-            'app',
-            'resources',
-            'routes',
-            'public/build',
-        ],
+        'watch_paths' => ['app', 'resources', 'routes', 'public/build'],
 
         // File extensions to watch for changes
         'watch_extensions' => ['php', 'blade.php', 'js', 'css', 'ts', 'vue', 'json'],
@@ -344,13 +331,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'hot_reload' => [
-        'watch_paths' => [
-            'app',
-            'resources',
-            'routes',
-            'config',
-            'public',
-        ],
+        'watch_paths' => ['app', 'resources', 'routes', 'config', 'public'],
 
         'exclude_patterns' => [
             '\.git',
