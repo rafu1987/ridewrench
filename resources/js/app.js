@@ -166,22 +166,24 @@ import '../scss/styles.scss'
 
   const initNavbar = () => {
     const navbarToggler = d.querySelector('.navbar-toggler.hamburger')
-    const navbarCollapse = d.querySelector('#appNav')
+    const appNav = d.querySelector('#appNav')
 
-    if (!navbarToggler || !navbarCollapse) {
+    if (!navbarToggler || !appNav) {
       return
     }
 
-    navbarCollapse.addEventListener('show.bs.collapse', () => {
+    appNav.addEventListener('show.bs.offcanvas', () => {
       navbarToggler.classList.add('is-active')
+      d.body.classList.add('app-nav-open')
     })
 
-    navbarCollapse.addEventListener('hide.bs.collapse', () => {
+    appNav.addEventListener('hide.bs.offcanvas', () => {
       navbarToggler.classList.remove('is-active')
     })
 
-    navbarCollapse.addEventListener('hidden.bs.collapse', () => {
+    appNav.addEventListener('hidden.bs.offcanvas', () => {
       navbarToggler.classList.remove('is-active')
+      d.body.classList.remove('app-nav-open')
     })
   }
 

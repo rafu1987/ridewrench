@@ -1,10 +1,23 @@
-.app {
-  &-navbar {
-    background: var(--rw-surface);
-    border-bottom: 0.0625rem solid var(--bs-border-color);
-
-    @include media(xxl) {
+@supports (backdrop-filter: blur(1px)) {
+  .app {
+    &-navbar {
+      background: var(--rw-surface);
+      border-bottom: 0.0625rem solid var(--bs-border-color);
       backdrop-filter: blur(1.125rem);
+      transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        backdrop-filter 0.2s ease,
+        -webkit-backdrop-filter 0.2s ease;
+    }
+  }
+
+  body {
+    &.app-nav-open {
+      .app-navbar {
+        background: var(--bs-body-bg);
+        backdrop-filter: none;
+      }
     }
   }
 }
