@@ -11,4 +11,6 @@ return [
     'register' => 'Registrarse',
     'settings' => 'Ajustes',
     'toggle' => 'Alternar navegación',
+    'history' => 'Historial',
+    'more' => 'Más',
 ];

@@ -11,4 +11,6 @@ return [
     'register' => 'Registrati',
     'settings' => 'Impostazioni',
     'toggle' => 'Apri/chiudi navigazione',
+    'history' => 'Cronologia',
+    'more' => 'Altro',
 ];

@@ -11,4 +11,6 @@ return [
     'register' => 'Inscription',
     'settings' => 'Paramètres',
     'toggle' => 'Ouvrir/fermer la navigation',
+    'history' => 'Historique',
+    'more' => 'Plus',
 ];

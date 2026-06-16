@@ -11,4 +11,6 @@ return [
     'register' => 'Register',
     'settings' => 'Settings',
     'toggle' => 'Toggle navigation',
+    'history' => 'History',
+    'more' => 'More',
 ];

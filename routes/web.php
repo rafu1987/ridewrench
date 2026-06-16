@@ -13,6 +13,7 @@ use App\Http\Controllers\SeoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CronController;
 use App\Http\Controllers\StravaWebhookController;
+use App\Http\Controllers\HistoryController;
 
 Route::get('/', [PublicPageController::class, 'home'])->name('home');
 Route::post('/language', [LanguageController::class, 'update'])->name('language.update');
@@ -52,7 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/rules/{rule}/delete', [MaintenanceRuleController::class, 'delete'])->name('rules.delete');
     Route::post('/rules/{rule}/done', [MaintenanceRuleController::class, 'done'])->name('rules.done');
 
-    Route::post('/rules/{rule}/done', [MaintenanceRuleController::class, 'done'])->name('rules.done');
+    Route::get('/history', [HistoryController::class, 'index'])->name('history');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::post('/settings/profile', [SettingsController::class, 'profile'])->name('settings.profile');

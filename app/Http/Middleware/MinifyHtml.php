@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use voku\helper\HtmlMin;
+use Illuminate\Support\Facades\App;
 
 class MinifyHtml
 {
@@ -13,6 +14,11 @@ class MinifyHtml
     {
         /** @var Response $response */
         $response = $next($request);
+
+        if (App::environment('local')) {
+            return $response;
+        }
+
         $contentType = (string) $response->headers->get('Content-Type');
 
         if (!str_contains($contentType, 'text/html')) {

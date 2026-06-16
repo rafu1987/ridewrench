@@ -222,47 +222,87 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="{{ e(__('common.close')) }}"></button>
             </div>
 
-            <div class="offcanvas-body">
+            <div class="offcanvas-body px-0">
                 @auth
-                    <div class="navbar-nav gap-2 app-nav ms-xxl-3 me-auto">
-                        <a class="nav-link {{ $active('/dashboard') }}" href="{{ url('/dashboard') }}">
-                            <i class="fa-light fa-sharp fa-gauge-high me-1"></i>
-                            {{ e(__('nav.dashboard')) }}
-                        </a>
-
-                        <a class="nav-link {{ $active('/bikes') }}" href="{{ url('/bikes') }}">
-                            <i class="fa-light fa-sharp fa-bicycle me-1"></i>
-                            {{ e(__('nav.bikes')) }}
-                        </a>
-
-                        <a class="nav-link {{ $active('/alerts') }}" href="{{ url('/alerts') }}">
-                            <i class="fa-light fa-sharp fa-bell me-1"></i>
-                            {{ e(__('nav.alerts')) }}
-                        </a>
-
-                        <a class="nav-link {{ $active('/settings') }}" href="{{ url('/settings') }}">
-                            <i class="fa-light fa-sharp fa-gear me-1"></i>
-                            {{ e(__('nav.settings')) }}
-                        </a>
-
-                        @if ($user?->is_admin)
-                            <a class="nav-link {{ $active('/admin') }}" href="{{ url('/admin') }}">
-                                <i class="fa-light fa-sharp fa-user-crown me-1"></i>
-                                {{ e(__('nav.admin')) }}
+                    <ul class="navbar-nav gap-2 app-nav ms-xxl-3 me-auto">
+                        <li class="nav-item px-3 px-xxl-0">
+                            <a class="nav-link {{ $active('/dashboard') }}" href="{{ url('/dashboard') }}">
+                                <i class="fa-light fa-sharp fa-gauge-high me-1"></i>
+                                {{ e(__('nav.dashboard')) }}
                             </a>
-                        @endif
+                        </li>
 
-                        <form method="post" class="nav-link d-xxl-none" action="{{ route('logout') }}">
-                            @csrf
+                        <li class="nav-item px-3 px-xxl-0">
+                            <a class="nav-link {{ $active('/bikes') }}" href="{{ url('/bikes') }}">
+                                <i class="fa-light fa-sharp fa-bicycle me-1"></i>
+                                {{ e(__('nav.bikes')) }}
+                            </a>
+                        </li>
 
-                            <button class="text-reset p-0 m-0 border-0 bg-transparent text-start w-100">
-                                <i class="fa-light fa-sharp fa-right-from-bracket me-1"></i>
-                                {{ e(__('nav.logout')) }}
-                            </button>
-                        </form>
-                    </div>
+                        <li class="nav-item px-3 px-xxl-0">
+                            <a class="nav-link {{ $active('/alerts') }}" href="{{ url('/alerts') }}">
+                                <i class="fa-light fa-sharp fa-bell me-1"></i>
+                                {{ e(__('nav.alerts')) }}
+                            </a>
+                        </li>
 
-                    <div class="d-flex align-items-center gap-2 mt-3 mt-xxl-0 flex-wrap">
+                        <li class="nav-item px-3 px-xxl-0 dropdown">
+                            <a
+                                href="#"
+                                class="nav-link dropdown-toggle {{ $active('/history') || $active('/settings') || $active('/admin') ? 'active' : '' }}"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <i class="fa-light fa-sharp fa-circle-ellipsis me-1"></i>
+                                {{ e(__('nav.more')) }}
+                            </a>
+
+                            <ul class="dropdown-menu mt-2">
+                                <li>
+                                    <a class="dropdown-item {{ $active('/history') }}" href="{{ url('/history') }}">
+                                        <i class="fa-light fa-sharp fa-clock-rotate-left me-1"></i>
+                                        {{ e(__('nav.history')) }}
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item {{ $active('/settings') }}" href="{{ url('/settings') }}">
+                                        <i class="fa-light fa-sharp fa-gear me-1"></i>
+                                        {{ e(__('nav.settings')) }}
+                                    </a>
+                                </li>
+
+                                @if ($user?->is_admin)
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li>
+                                        <a class="dropdown-item {{ $active('/admin') }}" href="{{ url('/admin') }}">
+                                            <i class="fa-light fa-sharp fa-user-crown me-1"></i>
+                                            {{ e(__('nav.admin')) }}
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+
+                        <li class="nav-item d-xxl-none">
+                            <hr class="my-1">
+                        </li>
+
+                        <li class="nav-item px-3 px-xxl-0">
+                            <form method="post" class="nav-link d-xxl-none" action="{{ route('logout') }}">
+                                @csrf
+
+                                <button class="text-reset p-0 m-0 border-0 bg-transparent text-start w-100">
+                                    <i class="fa-light fa-sharp fa-right-from-bracket me-1"></i>
+                                    {{ e(__('nav.logout')) }}
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-2 mt-3 mt-xxl-0 flex-wrap px-3 px-xxl-0">
                         <span class="app-user small d-none d-xxl-inline">
                             {{ e($user->name ?: $user->email) }}
                         </span>
