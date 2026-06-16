@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Services\MaintenanceService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -27,10 +26,6 @@ final class CronController extends Controller
             if (!hash_equals($configuredToken, $providedToken)) {
                 return response("Forbidden\n", 403)->header('Content-Type', 'text/plain; charset=utf-8');
             }
-
-            Artisan::call('migrate', [
-                '--force' => true,
-            ]);
 
             $cronRunId = $this->createCronRun();
 
