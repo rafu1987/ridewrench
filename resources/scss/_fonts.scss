@@ -28,10 +28,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-ridewrench-indoor:before {
-  content: '\e800';
-}
-
 .icon-ridewrench-road:before {
   content: '\e801';
 }
@@ -46,4 +42,8 @@
 
 .icon-ridewrench-other:before {
   content: '\e804';
+}
+
+.icon-ridewrench-indoor:before {
+  content: '\e805';
 }
