@@ -1,0 +1,71 @@
+.landing {
+  &-hero {
+    padding: clamp(1.5rem, 4vw, 4rem);
+    overflow: hidden;
+    color: var(--bs-white);
+    background:
+      radial-gradient(circle at 20% 20%, rgb(252 76 2 / 0.45), transparent 24rem),
+      radial-gradient(circle at 80% 10%, rgb(13 110 253 / 0.25), transparent 22rem),
+      linear-gradient(135deg, rgb(17 24 39 / 0.98), rgb(33 37 41 / 0.92));
+    border-radius: 0.9rem;
+    box-shadow: var(--rw-shadow);
+  }
+
+  &-title {
+    @include rfs(5rem);
+
+    max-width: 13ch;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.06em;
+  }
+
+  &-lead {
+    @include rfs(1.35rem);
+
+    max-width: 42rem;
+    color: rgb(255 255 255 / 0.72);
+  }
+
+  &-card {
+    padding: 1.25rem;
+    color: var(--rw-brand-dark-color);
+    background: rgb(255 255 255 / 0.92);
+    border: 0.0625rem solid rgb(15 23 42 / 0.08);
+    border-radius: var(--rw-radius);
+    box-shadow: var(--rw-shadow);
+    backdrop-filter: blur(1.125rem);
+
+    .text {
+      &-muted {
+        color: var(--rw-muted-landing-color) !important; /* stylelint-disable-line declaration-no-important */
+      }
+    }
+  }
+}
+
+@include color-mode(dark) {
+  .landing {
+    &-card {
+      color: var(--rw-brand-light-color);
+      background: rgb(15 20 27 / 0.88);
+      border-color: rgb(255 255 255 / 0.12);
+
+      .metric {
+        &-box {
+          color: var(--rw-brand-light-color);
+          background: rgb(255 255 255 / 0.07);
+        }
+      }
+
+      .status {
+        &-box {
+          &-ok {
+            color: var(--rw-ok-color);
+            background: rgb(25 135 84 / 0.18);
+          }
+        }
+      }
+    }
+  }
+}

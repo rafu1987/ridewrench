@@ -1,0 +1,20 @@
+.text {
+  &-dark {
+    color: var(--bs-body-color-strong) !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  &-muted {
+    color: var(--rw-muted) !important; /* stylelint-disable-line declaration-no-important */
+  }
+}
+
+.bg-light {
+  background-color: var(--rw-surface-muted) !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.border {
+  &,
+  &-top {
+    border-color: var(--bs-border-color) !important; /* stylelint-disable-line declaration-no-important */
+  }
+}

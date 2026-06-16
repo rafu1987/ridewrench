@@ -1,0 +1,65 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "name": "ridewrench",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:favicons": "node scripts/build-favicons.mjs",
+    "quality": "yarn format:check && yarn lint",
+    "quality:fix": "yarn format && yarn lint:fix",
+    "lint": "yarn lint:js && yarn lint:scss && yarn lint:php && yarn lint:blade",
+    "lint:fix": "yarn lint:js:fix && yarn lint:scss:fix",
+    "lint:js": "standard \"resources/js/**/*.js\"",
+    "lint:js:fix": "standard \"resources/js/**/*.js\" --fix",
+    "lint:scss": "stylelint \"resources/scss/**/*.scss\"",
+    "lint:scss:fix": "stylelint \"resources/scss/**/*.scss\" --fix",
+    "lint:php": "find app bootstrap config database routes -name '*.php' -print0 | xargs -0 -n1 php -l",
+    "lint:blade": "php artisan view:clear && php artisan view:cache",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "env:dev": "cp .env.dev .env && php artisan optimize:clear",
+    "env:live": "cp .env.live .env && php artisan optimize:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache",
+    "laravel:clear": "php artisan optimize:clear",
+    "laravel:cache": "php artisan config:cache && php artisan route:cache && php artisan view:cache",
+    "laravel:migrate": "php artisan migrate --force",
+    "predeploy": "yarn quality && composer dump-autoload -o",
+    "deploy:assets:dry": "rsync -avzn --delete public/build/ ridewrench-live:/www/htdocs/w021a6f5/ridewrench.de/public/build/",
+    "deploy:assets": "rsync -avz --delete public/build/ ridewrench-live:/www/htdocs/w021a6f5/ridewrench.de/public/build/",
+    "deploy:assets:live": "yarn quality && yarn build && yarn deploy:assets",
+    "deploy:live:dry": "rsync -avzn --delete --exclude='.env' --exclude='.env.dev' --exclude='.env.live' --exclude='node_modules' --exclude='vendor' --exclude='storage/logs' --exclude='storage/framework/cache' --exclude='storage/framework/sessions' --exclude='storage/framework/views' ./ ridewrench-live:/www/htdocs/w021a6f5/ridewrench.de/",
+    "deploy:live": "rsync -avz --delete --exclude='.env' --exclude='.env.dev' --exclude='.env.live' --exclude='node_modules' --exclude='vendor' --exclude='storage/logs' --exclude='storage/framework/cache' --exclude='storage/framework/sessions' --exclude='storage/framework/views' ./ ridewrench-live:/www/htdocs/w021a6f5/ridewrench.de/",
+    "deploy:live:finalize": "ssh ridewrench-live 'cd /www/htdocs/w021a6f5/ridewrench.de && composer install --no-dev --optimize-autoloader && php artisan migrate --force && php artisan optimize:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache'",
+    "deploy:live:full": "yarn quality && yarn build && yarn deploy:live && yarn deploy:live:finalize"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.25.0",
+    "autoprefixer": "^10.5.0",
+    "concurrently": "^9.0.1",
+    "laravel-vite-plugin": "^3.1",
+    "postcss": "^8.5.15",
+    "postcss-pxtorem": "^6.1.0",
+    "prettier": "^3.8.3",
+    "sass": "^1.89.0",
+    "standard": "^17.1.2",
+    "stylelint": "^17.12.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-order": "^8.1.1",
+    "vite": "^8.0.0",
+    "sharp": "^0.34.5"
+  },
+  "dependencies": {
+    "@fontsource/cookie": "^5.2.7",
+    "@fontsource/manrope": "^5.2.8",
+    "@fortawesome/fontawesome-pro": "^7.2.0",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "hamburgers": "^1.2.1"
+  },
+  "standard": {
+    "env": [
+      "browser"
+    ]
+  }
+}

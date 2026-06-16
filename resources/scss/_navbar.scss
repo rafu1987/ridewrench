@@ -1,0 +1,91 @@
+.app {
+  &-navbar {
+    background: var(--rw-surface);
+    border-bottom: 0.0625rem solid var(--bs-border-color);
+
+    @include media(xxl) {
+      backdrop-filter: blur(1.125rem);
+    }
+  }
+}
+
+.navbar {
+  &-brand {
+    color: var(--bs-body-color-strong);
+    letter-spacing: -0.03em;
+
+    &:hover,
+    &:focus {
+      color: var(--bs-body-color-strong);
+    }
+  }
+
+  &-toggler {
+    border-color: var(--bs-border-color);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgb(252 76 2 / 0.18);
+    }
+  }
+}
+
+.app {
+  &-user {
+    color: var(--rw-muted);
+  }
+}
+
+.app {
+  &-nav {
+    .nav {
+      &-link {
+        padding: 0.55rem 0.85rem;
+        font-weight: 600;
+        color: var(--rw-muted);
+        border-radius: 0.5rem;
+
+        @include states {
+          color: var(--bs-body-color-strong);
+          background: color-mix(in srgb, var(--bs-body-color-strong) 7%, transparent);
+        }
+
+        &.active {
+          color: var(--bs-white);
+          background: var(--rw-brand-dark-color);
+          box-shadow: var(--rw-shadow-soft);
+        }
+      }
+    }
+
+    @media (width <= 768px) {
+      flex-wrap: nowrap;
+      padding-bottom: 0.25rem;
+      overflow-x: auto;
+
+      .nav {
+        &-link {
+          white-space: nowrap;
+        }
+      }
+    }
+
+    @media (width <= 1400px) {
+      gap: 0.25rem;
+    }
+  }
+}
+
+@include color-mode(dark) {
+  .app {
+    &-nav {
+      .nav {
+        &-link {
+          &.active {
+            color: var(--rw-brand-dark-color);
+            background: var(--rw-brand-light-color);
+          }
+        }
+      }
+    }
+  }
+}

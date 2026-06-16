@@ -1,0 +1,32 @@
+@mixin button-states($selector: null) {
+  @if $selector != null {
+    &:hover,
+    &:focus,
+    &:focus-visible,
+    .focus,
+    &:active,
+    &:active:focus,
+    &:active:hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled):active:focus,
+    &:not(:disabled):not(.disabled).active,
+    &:not(:disabled):not(.disabled).active:focus,
+    #{$selector} {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:focus,
+    &:focus-visible,
+    .focus,
+    &:active,
+    &:active:focus,
+    &:active:hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled):active:focus,
+    &:not(:disabled):not(.disabled).active,
+    &:not(:disabled):not(.disabled).active:focus {
+      @content;
+    }
+  }
+}

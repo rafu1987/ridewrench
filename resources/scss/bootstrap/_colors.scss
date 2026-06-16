@@ -1,0 +1,16 @@
+/* stylelint-disable color-no-hex */
+
+$primary: #fc4c02;
+
+// Colors to add to use in components, i.e. .btn-secondary-consent
+$rw-colors: ();
+
+// Colors to add as CSS variables
+$colors: (
+  'black': #000,
+  'white': #fff,
+  'primary-hover': #e04402,
+  'body-color-strong': #111827
+);
+
+/* stylelint-enable color-no-hex */

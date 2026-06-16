@@ -1,0 +1,89 @@
+html {
+  color-scheme: light dark;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgb(252 76 2 / 0.1), transparent 32rem),
+    radial-gradient(circle at top right, rgb(13 110 253 / 0.08), transparent 28rem), var(--bs-body-bg);
+}
+
+@include color-mode(dark) {
+  body {
+    background:
+      radial-gradient(circle at top left, rgb(252 76 2 / 0.14), transparent 32rem),
+      radial-gradient(circle at top right, rgb(64 123 255 / 0.12), transparent 28rem), var(--bs-body-bg);
+  }
+}
+
+.logo {
+  &-text {
+    fill: var(--rw-brand-dark-color);
+  }
+}
+
+@include color-mode(dark) {
+  .logo {
+    &-text {
+      fill: var(--bs-white);
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+
+  &:not(.btn):not(.nav-link):not(.navbar-brand) {
+    color: var(--bs-primary);
+
+    &:hover {
+      color: var(--bs-primary-hover);
+    }
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+.brand {
+  &-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.5rem;
+    color: var(--bs-white);
+    background: linear-gradient(135deg, var(--bs-primary), var(--rw-brand-mark));
+    border-radius: var(--rw-radius-sm);
+
+    &-md {
+      width: 2.75rem;
+      height: 2.75rem;
+      font-size: 1.25rem;
+    }
+
+    &-lg {
+      width: 3.25rem;
+      height: 3.25rem;
+      font-size: 1.75rem;
+    }
+  }
+}

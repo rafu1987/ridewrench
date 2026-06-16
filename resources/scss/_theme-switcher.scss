@@ -1,0 +1,52 @@
+.btn {
+  &-theme {
+    color: var(--bs-body-color);
+    background: var(--rw-surface-muted);
+    border-color: var(--bs-border-color);
+
+    @include button-states {
+      color: var(--bs-body-color-strong);
+      background: color-mix(in srgb, var(--rw-surface-muted) 82%, var(--bs-primary));
+      border-color: color-mix(in srgb, var(--bs-border-color) 70%, var(--bs-primary));
+    }
+  }
+}
+
+.theme {
+  &-menu {
+    min-width: 11rem;
+    padding: 0.4rem;
+    background: var(--rw-surface-solid);
+    border: 0.0625rem solid var(--bs-border-color);
+    border-radius: var(--rw-radius);
+    box-shadow: var(--rw-shadow-soft);
+
+    .dropdown {
+      &-item {
+        padding: 0.55rem 0.65rem;
+        font-weight: 600;
+        color: var(--bs-body-color);
+        border-radius: 0.45rem;
+
+        @include states {
+          color: var(--bs-body-color-strong);
+          background: var(--rw-surface-muted);
+        }
+
+        &.active,
+        &:active {
+          color: var(--bs-white);
+          background: var(--bs-primary);
+        }
+      }
+
+      &-divider {
+        border-color: var(--bs-border-color);
+      }
+    }
+  }
+
+  &-check {
+    transition: opacity 0.15s ease;
+  }
+}

@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'addRule' => 'Add maintenance rule',
+    'addRuleButton' => 'Add rule',
+    'backToBikes' => 'Back to bikes',
+    'editRule' => 'Edit rule',
+    'examplesText' => 'Wax chain: 300 km · Tubeless fluid: 90 days · Chain wear: 500 km · Combined rules can use both limits.',
+    'examplesTitle' => 'Examples',
+    'interval' => 'Interval',
+    'kicker' => 'Maintenance setup',
+    'noEmail' => 'No email',
+    'noRulesText' => 'Add your first distance or time-based maintenance rule above.',
+    'noRulesTitle' => 'No rules for this bike yet',
+    'pageTitle' => 'Bike rules',
+    'placeholderName' => 'Check tubeless fluid',
+    'ruleName' => 'Rule name',
+    'startDateEditHelp' => 'Changing this date sets a new baseline for this rule.',
+    'startDateHelp' => 'Use the start date as the last time this maintenance was done.',
+    'subtitle' => 'Configure wax, tubeless, chain wear and other bike-specific reminders.',
+    'template' => 'Template',
+    'templateCustom' => 'Custom rule',
+    'templateHelp' => 'Choose a template to prefill common maintenance intervals. You can edit everything before saving.',
+    'titleForBike' => ':0 - rules',
+    'type' => 'Type',
+];

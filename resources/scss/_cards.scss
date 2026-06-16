@@ -1,0 +1,25 @@
+.card {
+  color: var(--bs-body-color);
+  background: var(--rw-surface-solid);
+  border: 0;
+  border-radius: var(--rw-radius);
+  box-shadow: var(--rw-shadow-soft);
+
+  &-lift {
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
+
+    &:hover {
+      box-shadow: var(--rw-shadow);
+      transform: translateY(-0.125rem);
+    }
+  }
+}
+
+.empty {
+  &-state {
+    background: var(--rw-surface-soft);
+    border: 0.0625rem dashed var(--bs-border-color);
+  }
+}

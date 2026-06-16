@@ -1,0 +1,11 @@
+main {
+  &.container {
+    padding-bottom: 4rem;
+  }
+}
+
+@media (width <= 768px) {
+  .page-hero {
+    border-radius: 0.75rem;
+  }
+}

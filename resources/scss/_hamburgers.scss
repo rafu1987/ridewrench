@@ -1,0 +1,52 @@
+$hamburger-padding-x: 0;
+$hamburger-padding-y: 0;
+$hamburger-layer-width: 1.375rem;
+$hamburger-layer-height: 0.125rem;
+$hamburger-layer-spacing: 0.3125rem;
+$hamburger-layer-color: var(--bs-body-color-strong);
+$hamburger-layer-border-radius: 62.4375rem;
+$hamburger-hover-opacity: 1;
+$hamburger-active-layer-color: var(--bs-body-color-strong);
+$hamburger-active-hover-opacity: 1;
+$hamburger-types: (squeeze);
+
+@import 'hamburgers/_sass/hamburgers/hamburgers';
+
+.navbar {
+  &-toggler {
+    &.hamburger {
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0;
+      line-height: 1;
+      background: var(--rw-surface-muted);
+      border: 0.0625rem solid var(--bs-border-color);
+      border-radius: 0.5rem;
+
+      &:hover,
+      &:focus {
+        background: color-mix(in srgb, var(--rw-surface-muted) 82%, var(--bs-primary));
+        border-color: color-mix(in srgb, var(--bs-border-color) 70%, var(--bs-primary));
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 0.2rem rgb(252 76 2 / 0.18);
+      }
+
+      .hamburger {
+        &-box {
+          display: block;
+          margin: 0 auto;
+        }
+
+        &-inner {
+          &,
+          &:before,
+          &:after {
+            background-color: var(--bs-body-color-strong);
+          }
+        }
+      }
+    }
+  }
+}

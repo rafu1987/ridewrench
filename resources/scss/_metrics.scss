@@ -1,0 +1,24 @@
+.metric {
+  &-box {
+    padding: 0.75rem;
+    background: var(--rw-surface-muted);
+    border-radius: 0.65rem;
+  }
+}
+
+.status {
+  &-box {
+    padding: 0.85rem 1rem;
+    border-radius: 0.65rem;
+
+    &-ok {
+      color: var(--rw-ok-text);
+      background: var(--rw-ok-bg);
+    }
+
+    &-due {
+      color: var(--rw-due-text);
+      background: var(--rw-due-bg);
+    }
+  }
+}

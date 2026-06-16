@@ -1,0 +1,33 @@
+@supports (padding-top: env(safe-area-inset-top)) {
+  @media (hover: none) and (pointer: coarse) {
+    .app-navbar {
+      padding-top: max(var(--bs-navbar-padding-y), env(safe-area-inset-top));
+
+      .offcanvas {
+        &-header {
+          padding-top: max(var(--bs-offcanvas-padding-y), env(safe-area-inset-top));
+        }
+
+        &-body {
+          padding-bottom: max(var(--bs-offcanvas-padding-y), env(safe-area-inset-bottom));
+        }
+      }
+    }
+  }
+
+  @media (hover: none) and (pointer: coarse) and (max-width: 992px) {
+    .modal {
+      padding-top: env(safe-area-inset-top);
+      padding-right: env(safe-area-inset-right);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+
+      &-dialog {
+        margin-top: max(var(--bs-modal-margin), env(safe-area-inset-top));
+        margin-right: max(var(--bs-modal-margin), env(safe-area-inset-right));
+        margin-bottom: max(var(--bs-modal-margin), env(safe-area-inset-bottom));
+        margin-left: max(var(--bs-modal-margin), env(safe-area-inset-left));
+      }
+    }
+  }
+}

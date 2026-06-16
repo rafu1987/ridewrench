@@ -1,0 +1,29 @@
+@mixin media($breakpoint) {
+  @if $breakpoint == xs {
+    @media (width <= 575px) {
+      @content;
+    }
+  } @else if $breakpoint == sm {
+    @media (width >= 576px) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (width >= 768px) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (width >= 992px) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (width >= 1200px) {
+      @content;
+    }
+  } @else if $breakpoint == xxl {
+    @media (width >= 1400px) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint mixin supports: xs, sm, md, lg, xl, xxl";
+  }
+}

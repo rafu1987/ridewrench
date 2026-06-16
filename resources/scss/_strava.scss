@@ -1,0 +1,17 @@
+.strava-connect-button {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  &:focus-visible {
+    border-radius: 0.35rem;
+    outline: 0.2rem solid rgb(252 76 2 / 0.35);
+    outline-offset: 0.2rem;
+  }
+}

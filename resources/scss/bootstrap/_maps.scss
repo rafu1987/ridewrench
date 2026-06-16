@@ -1,0 +1,6 @@
+@use 'sass:map';
+@use 'sass:meta';
+
+@if meta.variable-exists(rw-colors) {
+  $theme-colors: map.merge($theme-colors, $rw-colors);
+}

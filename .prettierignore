@@ -1,0 +1,11 @@
+vendor
+node_modules
+public/build
+public/hot
+storage
+bootstrap/cache
+
+*.log
+.env
+.env.dev
+.env.live

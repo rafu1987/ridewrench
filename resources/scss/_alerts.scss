@@ -1,0 +1,33 @@
+.alert {
+  border: 0;
+  border-radius: var(--rw-radius);
+  box-shadow: var(--rw-shadow-soft);
+}
+
+/* stylelint-disable color-no-hex */
+
+@include color-mode(dark) {
+  .alert {
+    &-success {
+      --bs-alert-color: #93e2b7;
+      --bs-alert-bg: rgb(25 135 84 / 0.16);
+    }
+
+    &-warning {
+      --bs-alert-color: #ffd978;
+      --bs-alert-bg: rgb(255 193 7 / 0.16);
+    }
+
+    &-danger {
+      --bs-alert-color: #ffb4bd;
+      --bs-alert-bg: rgb(220 53 69 / 0.16);
+    }
+
+    &-info {
+      --bs-alert-color: #9ed5ff;
+      --bs-alert-bg: rgb(13 202 240 / 0.16);
+    }
+  }
+}
+
+/* stylelint-enable color-no-hex */

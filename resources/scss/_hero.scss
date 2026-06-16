@@ -1,0 +1,29 @@
+.page {
+  &-hero {
+    position: relative;
+    padding: 1.25rem;
+    overflow: hidden;
+    color: var(--bs-white);
+    background:
+      linear-gradient(135deg, var(--rw-hero-start), var(--rw-hero-end)),
+      linear-gradient(135deg, rgb(252 76 2 / 0.35), rgb(13 110 253 / 0.25));
+    border-radius: 0.9rem;
+    box-shadow: var(--rw-shadow);
+
+    &:after {
+      position: absolute;
+      right: -3rem;
+      bottom: -5rem;
+      width: 16rem;
+      height: 16rem;
+      background: var(--rw-hero-glow);
+      border-radius: 62.4375rem;
+      content: '';
+    }
+
+    & > * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+}

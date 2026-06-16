@@ -1,0 +1,20 @@
+@mixin states($selector: null) {
+  @if $selector != null {
+    &:active,
+    &:focus,
+    &:focus-visible,
+    .focus,
+    &:hover,
+    #{$selector} {
+      @content;
+    }
+  } @else {
+    &:active,
+    &:focus,
+    &:focus-visible,
+    .focus,
+    &:hover {
+      @content;
+    }
+  }
+}

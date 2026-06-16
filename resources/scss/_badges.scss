@@ -1,0 +1,82 @@
+@use 'sass:map';
+
+/* stylelint-disable color-no-hex */
+
+$badge-colors: (
+  road: (
+    light: (
+      color: #842029,
+      bg: #f8d7da
+    ),
+    dark: (
+      color: #ffb4bd,
+      bg: rgb(220 53 69 / 0.18)
+    )
+  ),
+  gravel: (
+    light: (
+      color: #664d03,
+      bg: #fff3cd
+    ),
+    dark: (
+      color: #ffd978,
+      bg: rgb(255 193 7 / 0.18)
+    )
+  ),
+  mtb: (
+    light: (
+      color: #3d0a57,
+      bg: #ead7ff
+    ),
+    dark: (
+      color: #d8b4fe,
+      bg: rgb(126 34 206 / 0.24)
+    )
+  ),
+  indoor: (
+    light: (
+      color: #084298,
+      bg: #cfe2ff
+    ),
+    dark: (
+      color: #9ec5fe,
+      bg: rgb(13 110 253 / 0.2)
+    )
+  ),
+  other: (
+    light: (
+      color: #41464b,
+      bg: #e2e3e5
+    ),
+    dark: (
+      color: #cbd5e1,
+      bg: rgb(148 163 184 / 0.2)
+    )
+  )
+);
+
+/* stylelint-enable color-no-hex */
+
+@mixin badge-variants($mode) {
+  @each $name, $config in $badge-colors {
+    &-#{$name} {
+      color: map.get(map.get($config, $mode), color);
+      background-color: map.get(map.get($config, $mode), bg);
+    }
+  }
+}
+
+.badge {
+  padding: 0.45rem 0.65rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  border-radius: var(--rw-radius-sm);
+
+  @include badge-variants(light);
+}
+
+@include color-mode(dark) {
+  .badge {
+    @include badge-variants(dark);
+  }
+}
