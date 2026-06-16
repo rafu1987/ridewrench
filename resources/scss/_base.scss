@@ -33,6 +33,7 @@ body {
 
 a {
   text-decoration: none;
+  transition: all 0.2s ease;
 
   &:not(.btn):not(.nav-link):not(.navbar-brand):not(.dropdown-item) {
     color: var(--bs-primary);

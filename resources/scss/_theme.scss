@@ -36,6 +36,7 @@
   --bs-border-color: rgb(15 23 42 / 0.1);
   --bs-font-sans-serif: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --bs-body-line-height: 1.6;
+  --bs-primary-hover: var(--bs-body-color);
 }
 
 @include color-mode(dark) {
