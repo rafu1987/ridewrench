@@ -192,7 +192,7 @@
         media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
     >
 
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/ridewrench.js'])
 </head>
 
 <body class="d-flex flex-column min-vh-100">

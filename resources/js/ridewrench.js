@@ -5,7 +5,7 @@ import '@fontsource/manrope/500.css'
 import '@fontsource/manrope/600.css'
 import '@fontsource/manrope/700.css'
 import '@fontsource/cookie'
-import '../scss/styles.scss'
+import '../scss/ridewrench.scss'
 ;((w, d) => {
   const storageKey = 'ridewrench-theme'
   const darkModeQuery = w.matchMedia('(prefers-color-scheme: dark)')
