@@ -76,7 +76,7 @@ final class SettingsController extends Controller
         ]);
 
         if (!Hash::check($validated['current_password'], $user->password)) {
-            return redirect('/settings')->with('error', __('flash.currentPasswordInvalid'));
+            return redirect('/settings')->with('error', 'currentPasswordInvalid');
         }
 
         DB::table('users')
@@ -87,7 +87,7 @@ final class SettingsController extends Controller
                 'updated_at' => now(),
             ]);
 
-        return redirect('/settings')->with('success', __('flash.profileUpdated'));
+        return redirect('/settings')->with('success', 'profileUpdated');
     }
 
     public function password(Request $request): RedirectResponse
@@ -101,11 +101,11 @@ final class SettingsController extends Controller
         ]);
 
         if (!Hash::check($validated['current_password'], $user->password)) {
-            return redirect('/settings')->with('error', __('flash.currentPasswordInvalid'));
+            return redirect('/settings')->with('error', 'currentPasswordInvalid');
         }
 
         if ($validated['new_password'] !== $validated['new_password_repeat']) {
-            return redirect('/settings')->with('error', __('flash.passwordsDoNotMatch'));
+            return redirect('/settings')->with('error', 'passwordsDoNotMatch');
         }
 
         DB::table('users')
@@ -115,7 +115,7 @@ final class SettingsController extends Controller
                 'updated_at' => now(),
             ]);
 
-        return redirect('/settings')->with('success', __('flash.passwordChanged'));
+        return redirect('/settings')->with('success', 'passwordChanged');
     }
 
     public function emailReminders(Request $request): RedirectResponse
@@ -129,7 +129,7 @@ final class SettingsController extends Controller
                 'updated_at' => now(),
             ]);
 
-        return redirect('/settings')->with('success', __('flash.emailRemindersSaved'));
+        return redirect('/settings')->with('success', 'emailRemindersSaved');
     }
 
     public function language(Request $request): RedirectResponse
@@ -151,7 +151,7 @@ final class SettingsController extends Controller
                 'updated_at' => now(),
             ]);
 
-        return redirect('/settings')->with('success', __('settings.languageSaved'));
+        return redirect('/settings')->with('success', 'settings.languageSaved');
     }
 
     public function exportData(Request $request): StreamedResponse
@@ -210,11 +210,11 @@ final class SettingsController extends Controller
         ]);
 
         if (!Hash::check($validated['password'], $user->password)) {
-            return redirect('/settings')->with('error', __('flash.currentPasswordInvalid'));
+            return redirect('/settings')->with('error', 'currentPasswordInvalid');
         }
 
         if ($validated['confirm'] !== 'DELETE') {
-            return redirect('/settings')->with('error', __('flash.deleteAccountConfirmInvalid'));
+            return redirect('/settings')->with('error', 'deleteAccountConfirmInvalid');
         }
 
         $account = DB::table('strava_accounts')->where('user_id', $user->id)->first();
@@ -234,7 +234,7 @@ final class SettingsController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('success', __('flash.accountDeleted'));
+        return redirect('/')->with('success', 'accountDeleted');
     }
 
     public function testEmail(Request $request): RedirectResponse
@@ -320,10 +320,10 @@ final class SettingsController extends Controller
         $debug = null;
 
         if ($this->sendSettingsHtmlEmail($toEmail, $subject, $body, $debug)) {
-            return redirect('/settings')->with('success', __('flash.testEmailAccepted', [$debug]));
+            return redirect('/settings')->with('success', 'testEmailAccepted', [$debug]);
         }
 
-        return redirect('/settings')->with('error', __('flash.testEmailFailed', [$debug]));
+        return redirect('/settings')->with('error', 'testEmailFailed', [$debug]);
     }
 
     public function testDueEmail(Request $request, MaintenanceService $maintenanceService): RedirectResponse
@@ -341,10 +341,10 @@ final class SettingsController extends Controller
                 'language' => $user->language,
             ])
         ) {
-            return redirect('/settings')->with('success', __('flash.testEmailAccepted', ['Due email preview sent.']));
+            return redirect('/settings')->with('success', 'testEmailAccepted', ['Due email preview sent.']);
         }
 
-        return redirect('/settings')->with('error', __('flash.testEmailFailed', ['See app debug log.']));
+        return redirect('/settings')->with('error', 'testEmailFailed', ['See app debug log.']);
     }
 
     private function sendSettingsHtmlEmail(string $to, string $subject, string $body, ?string &$debug = null): bool

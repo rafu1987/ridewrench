@@ -9,32 +9,6 @@ final class StravaClient
 {
     private string $baseUrl = 'https://www.strava.com/api/v3';
 
-    public function authUrl(string $state): string
-    {
-        return 'https://www.strava.com/oauth/authorize?' .
-            http_build_query([
-                'client_id' => (string) config('services.strava.client_id'),
-                'redirect_uri' => (string) config('services.strava.redirect_uri'),
-                'response_type' => 'code',
-                'approval_prompt' => 'auto',
-                'scope' => 'read,activity:read_all',
-                'state' => $state,
-            ]);
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function tokenFromCode(string $code): array
-    {
-        return $this->postToken([
-            'client_id' => (string) config('services.strava.client_id'),
-            'client_secret' => (string) config('services.strava.client_secret'),
-            'code' => $code,
-            'grant_type' => 'authorization_code',
-        ]);
-    }
-
     /**
      * @param array<string, mixed> $account
      * @return array<string, mixed>

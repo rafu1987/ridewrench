@@ -37,7 +37,7 @@ return [
     'strava' => [
         'client_id' => env('STRAVA_CLIENT_ID'),
         'client_secret' => env('STRAVA_CLIENT_SECRET'),
-        'redirect_uri' => env('STRAVA_REDIRECT_URI', env('APP_URL') . '/strava/callback'),
+        'redirect' => env('STRAVA_REDIRECT_URI', env('APP_URL') . '/strava/callback'),
         'webhook_verify_token' => env('STRAVA_WEBHOOK_VERIFY_TOKEN', ''),
     ],
 

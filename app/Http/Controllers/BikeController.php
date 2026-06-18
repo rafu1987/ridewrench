@@ -82,7 +82,7 @@ final class BikeController extends Controller
                 ]);
         }
 
-        return redirect('/bikes')->with('success', __('flash.bikeUpdated'));
+        return redirect('/bikes')->with('success', 'bikeUpdated');
     }
 
     public function show(Request $request, int $bike, MaintenanceService $maintenanceService): View
@@ -132,7 +132,7 @@ final class BikeController extends Controller
         }
 
         if ($name === '') {
-            return redirect('/bikes/' . $bikeRow->id)->with('error', __('flash.ruleNameRequired'));
+            return redirect('/bikes/' . $bikeRow->id)->with('error', 'ruleNameRequired');
         }
 
         $ruleKind = (string) $request->input('rule_kind', $template['rule_kind'] ?? 'distance');
@@ -179,6 +179,6 @@ final class BikeController extends Controller
             ]);
         }
 
-        return redirect('/bikes/' . $bikeRow->id)->with('success', __('flash.ruleAdded'));
+        return redirect('/bikes/' . $bikeRow->id)->with('success', 'ruleAdded');
     }
 }

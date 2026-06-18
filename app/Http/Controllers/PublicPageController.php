@@ -64,11 +64,11 @@ final class PublicPageController extends Controller
         }
 
         if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return redirect('/feedback')->with('error', __('flash.emailInvalid'));
+            return redirect('/feedback')->with('error', 'emailInvalid');
         }
 
         if ($message === '') {
-            return redirect('/feedback')->with('error', __('flash.feedbackMessageRequired'));
+            return redirect('/feedback')->with('error', 'feedbackMessageRequired');
         }
 
         $recaptchaSiteKey = (string) config('services.recaptcha.site_key');
@@ -78,7 +78,7 @@ final class PublicPageController extends Controller
             $recaptchaToken = (string) $request->input('g-recaptcha-response', '');
 
             if (!$this->verifyRecaptcha($recaptchaToken, $request->ip())) {
-                return redirect('/feedback')->with('error', __('flash.recaptchaFailed'));
+                return redirect('/feedback')->with('error', 'recaptchaFailed');
             }
         }
 
@@ -87,7 +87,7 @@ final class PublicPageController extends Controller
         if ($to === '') {
             Log::error('Feedback email failed: config("services.feedback.email") is empty.');
 
-            return redirect('/feedback')->with('error', __('flash.feedbackFailed'));
+            return redirect('/feedback')->with('error', 'feedbackFailed');
         }
 
         $typeLabel = __('feedback.type.' . $type);
@@ -160,12 +160,12 @@ final class PublicPageController extends Controller
         $debug = null;
 
         if ($this->sendFeedbackEmail($to, $subject, $body, $debug, $email !== '' ? $email : null, $name !== '' ? $name : null)) {
-            return redirect('/feedback/thank-you')->with('success', __('flash.feedbackSent'));
+            return redirect('/feedback/thank-you')->with('success', 'feedbackSent');
         }
 
         Log::error('Feedback email failed: ' . (string) $debug);
 
-        return redirect('/feedback')->with('error', __('flash.feedbackFailed'));
+        return redirect('/feedback')->with('error', 'feedbackFailed');
     }
 
     public function feedbackThankYou(Request $request): View

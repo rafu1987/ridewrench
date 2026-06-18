@@ -30,7 +30,7 @@ final class MaintenanceRuleController extends Controller
         }
 
         if ($name === '') {
-            return redirect('/bikes/' . $ruleRow->bike_id)->with('error', __('flash.ruleNameRequired'));
+            return redirect('/bikes/' . $ruleRow->bike_id)->with('error', 'ruleNameRequired');
         }
 
         $ruleKind = (string) $request->input('rule_kind', $template['rule_kind'] ?? 'distance');
@@ -82,7 +82,7 @@ final class MaintenanceRuleController extends Controller
                 ->delete();
         }
 
-        return redirect('/bikes/' . $ruleRow->bike_id)->with('success', __('flash.ruleUpdated'));
+        return redirect('/bikes/' . $ruleRow->bike_id)->with('success', 'ruleUpdated');
     }
 
     public function reset(Request $request, int $rule): RedirectResponse
@@ -99,7 +99,7 @@ final class MaintenanceRuleController extends Controller
 
         DB::table('maintenance_alerts')->where('rule_id', $ruleRow->id)->where('user_id', $user->id)->delete();
 
-        return redirect('/bikes/' . $ruleRow->bike_id)->with('success', __('flash.ruleReset'));
+        return redirect('/bikes/' . $ruleRow->bike_id)->with('success', 'ruleReset');
     }
 
     public function delete(Request $request, int $rule): RedirectResponse
@@ -118,7 +118,7 @@ final class MaintenanceRuleController extends Controller
 
         DB::table('maintenance_rules')->where('id', $ruleRow->id)->where('user_id', $user->id)->delete();
 
-        return redirect('/bikes/' . $ruleRow->bike_id)->with('success', __('flash.ruleDeleted'));
+        return redirect('/bikes/' . $ruleRow->bike_id)->with('success', 'ruleDeleted');
     }
 
     public function done(Request $request, int $rule): RedirectResponse
@@ -149,7 +149,7 @@ final class MaintenanceRuleController extends Controller
                 'updated_at' => now(),
             ]);
 
-        return redirect('/dashboard')->with('success', __('flash.maintenanceDone'));
+        return redirect('/dashboard')->with('success', 'maintenanceDone');
     }
 
     public function startDate(Request $request, int $rule, MaintenanceService $maintenanceService): RedirectResponse
@@ -176,10 +176,10 @@ final class MaintenanceRuleController extends Controller
 
             $maintenanceService->createDueAlerts((int) $user->id);
 
-            return redirect('/bikes/' . $ruleRow->bike_id)->with('success', __('flash.startDateSaved'));
+            return redirect('/bikes/' . $ruleRow->bike_id)->with('success', 'startDateSaved');
         }
 
-        return redirect('/bikes/' . ($ruleRow->bike_id ?? ''))->with('error', __('flash.ruleNameRequired'));
+        return redirect('/bikes/' . ($ruleRow->bike_id ?? ''))->with('error', 'ruleNameRequired');
     }
 
     public function email(Request $request, int $rule): RedirectResponse
@@ -202,10 +202,7 @@ final class MaintenanceRuleController extends Controller
                 'updated_at' => now(),
             ]);
 
-        return redirect('/bikes/' . $ruleRow->bike_id)->with(
-            'success',
-            $emailEnabled ? __('flash.ruleEmailEnabled') : __('flash.ruleEmailDisabled'),
-        );
+        return redirect('/bikes/' . $ruleRow->bike_id)->with('success', $emailEnabled ? 'ruleEmailEnabled' : 'ruleEmailDisabled');
     }
 
     private function findUserRule(int $ruleId, int $userId): ?object

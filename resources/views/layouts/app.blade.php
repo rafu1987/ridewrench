@@ -350,40 +350,41 @@
     </div>
 </nav>
 
+@php
+    $flashMessage = static function (?string $value): ?string {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        $direct = __($value);
+
+        if ($direct !== $value) {
+            return $direct;
+        }
+
+        $flashKey = 'flash.' . $value;
+        $flash = __($flashKey);
+
+        return $flash !== $flashKey ? $flash : $value;
+    };
+@endphp
+
 <main class="container mb-5 flex-grow-1">
     @if (session('status'))
-        @php
-            $status = (string) session('status');
-            $statusTranslationKey = 'flash.' . $status;
-            $statusMessage = __($statusTranslationKey);
-        @endphp
-
         <div class="alert alert-success mb-4">
-            {{ e($statusMessage !== $statusTranslationKey ? $statusMessage : $status) }}
+            {{ e($flashMessage((string) session('status'))) }}
         </div>
     @endif
 
     @if (session('success'))
-        @php
-            $success = (string) session('success');
-            $successTranslationKey = 'flash.' . $success;
-            $successMessage = __($successTranslationKey);
-        @endphp
-
         <div class="alert alert-success mb-4">
-            {{ e($successMessage !== $successTranslationKey ? $successMessage : $success) }}
+            {{ e($flashMessage((string) session('success'))) }}
         </div>
     @endif
 
     @if (session('error'))
-        @php
-            $error = (string) session('error');
-            $errorTranslationKey = 'flash.' . $error;
-            $errorMessage = __($errorTranslationKey);
-        @endphp
-
         <div class="alert alert-danger mb-4">
-            {{ e($errorMessage !== $errorTranslationKey ? $errorMessage : $error) }}
+            {{ e($flashMessage((string) session('error'))) }}
         </div>
     @endif
 

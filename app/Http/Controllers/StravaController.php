@@ -8,86 +8,91 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 final class StravaController extends Controller
 {
-    public function connect(Request $request, StravaClient $client): RedirectResponse
+    public function connect(Request $request): RedirectResponse
     {
-        $state = Str::random(40);
+        $redirect = (string) $request->query('redirect', '/dashboard');
 
-        $request->session()->put('strava_state', $state);
-
-        $redirect = (string) $request->query('redirect', $request->headers->get('referer', '/dashboard'));
-        $redirectPath = parse_url($redirect, PHP_URL_PATH) ?: '/dashboard';
-
-        if (!str_starts_with($redirectPath, '/')) {
-            $redirectPath = '/dashboard';
+        if (!str_starts_with($redirect, '/')) {
+            $redirect = '/dashboard';
         }
 
-        $request->session()->put('strava_redirect', $redirectPath);
+        $request->session()->put('strava_redirect_after_connect', $redirect);
 
-        return redirect()->away($client->authUrl($state));
+        return Socialite::driver('strava')
+            ->scopes(['read', 'activity:read_all'])
+            ->redirect();
     }
 
-    public function callback(Request $request, StravaClient $client, MaintenanceService $maintenanceService): RedirectResponse
+    public function callback(Request $request, MaintenanceService $maintenanceService): RedirectResponse
     {
-        $user = $request->user();
+        $redirect = (string) $request->session()->pull('strava_redirect_after_connect', '/dashboard');
 
-        $redirectPath = (string) $request->session()->pull('strava_redirect', '/dashboard');
-
-        if (!str_starts_with($redirectPath, '/')) {
-            $redirectPath = '/dashboard';
+        if (!str_starts_with($redirect, '/')) {
+            $redirect = '/dashboard';
         }
 
-        $expectedState = (string) $request->session()->pull('strava_state', '');
-
-        if (!hash_equals($expectedState, (string) $request->query('state', ''))) {
-            return redirect('/settings')->with('error', __('flash.invalidStravaState'));
-        }
-
-        if (!$request->query('code')) {
-            return redirect('/settings')->with('error', __('flash.invalidStravaState'));
+        if ($request->has('error')) {
+            return redirect($redirect)->with('error', 'stravaConnectFailed');
         }
 
         try {
-            $token = $client->tokenFromCode((string) $request->query('code'));
-            $athlete = $token['athlete'] ?? [];
-
-            if (!is_array($athlete)) {
-                $athlete = [];
-            }
-
-            $athleteId = (int) ($athlete['id'] ?? 0);
-            $athleteName = trim((string) ($athlete['firstname'] ?? '') . ' ' . (string) ($athlete['lastname'] ?? ''));
-
-            if ($athleteName === '') {
-                $athleteName = 'Strava athlete ' . $athleteId;
-            }
-
-            DB::table('strava_accounts')->updateOrInsert(
-                [
-                    'user_id' => $user->id,
-                ],
-                [
-                    'athlete_id' => $athleteId,
-                    'athlete_name' => $athleteName,
-                    'access_token' => (string) $token['access_token'],
-                    'refresh_token' => (string) $token['refresh_token'],
-                    'expires_at' => (int) $token['expires_at'],
-                    'updated_at' => now(),
-                    'created_at' => now(),
-                ],
-            );
-
-            $maintenanceService->syncUser((int) $user->id);
-
-            return redirect($redirectPath)->with('success', __('flash.stravaConnectedSynced'));
+            $socialiteUser = Socialite::driver('strava')->user();
         } catch (\Throwable $e) {
-            $maintenanceService->markSyncError((int) $user->id, $e->getMessage());
+            Log::error('Strava OAuth callback failed: ' . $e->getMessage(), [
+                'exception' => $e,
+            ]);
 
-            return redirect('/settings')->with('error', $e->getMessage());
+            return redirect($redirect)->with('error', 'stravaConnectFailed');
         }
+
+        $user = $request->user();
+
+        if (!$user) {
+            return redirect('/login')->with('error', 'auth.loginRequired');
+        }
+
+        $athlete = $socialiteUser->user ?? [];
+
+        $athleteId = (int) ($socialiteUser->getId() ?: $athlete['id'] ?? 0);
+
+        if ($athleteId <= 0) {
+            return redirect($redirect)->with('error', 'stravaConnectFailed');
+        }
+
+        $athleteName = trim(
+            (string) ($socialiteUser->getName() ?: ($athlete['firstname'] ?? '') . ' ' . ($athlete['lastname'] ?? '')),
+        );
+
+        DB::table('strava_accounts')->updateOrInsert(
+            ['user_id' => $user->id],
+            [
+                'athlete_id' => $athleteId,
+                'athlete_name' => $athleteName !== '' ? $athleteName : null,
+                'access_token' => $socialiteUser->token,
+                'refresh_token' => $socialiteUser->refreshToken,
+                'expires_at' => (int) ($socialiteUser->expiresIn ? time() + $socialiteUser->expiresIn : time()),
+                'last_sync_error' => null,
+                'updated_at' => now(),
+                'created_at' => now(),
+            ],
+        );
+
+        try {
+            $maintenanceService->syncUser((int) $user->id, true);
+        } catch (\Throwable $e) {
+            Log::error('Initial Strava sync after connect failed: ' . $e->getMessage(), [
+                'exception' => $e,
+                'user_id' => $user->id,
+            ]);
+
+            return redirect($redirect)->with('success', 'stravaConnected');
+        }
+
+        return redirect($redirect)->with('success', 'stravaConnected');
     }
 
     public function disconnect(Request $request, StravaClient $client): RedirectResponse
@@ -104,7 +109,7 @@ final class StravaController extends Controller
         $account = DB::table('strava_accounts')->where('user_id', $user->id)->first();
 
         if (!$account) {
-            return redirect($redirectPath)->with('status', __('flash.stravaAlreadyDisconnected'));
+            return redirect($redirectPath)->with('status', 'stravaAlreadyDisconnected');
         }
 
         try {
@@ -115,6 +120,6 @@ final class StravaController extends Controller
 
         DB::table('strava_accounts')->where('user_id', $user->id)->delete();
 
-        return redirect($redirectPath)->with('success', __('flash.stravaDisconnected'));
+        return redirect($redirectPath)->with('success', 'stravaDisconnected');
     }
 }
