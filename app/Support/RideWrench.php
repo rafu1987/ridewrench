@@ -3,7 +3,6 @@
 namespace App\Support;
 
 use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 
 final class RideWrench
 {
@@ -37,7 +36,13 @@ final class RideWrench
 
         $format = config('ridewrench.languages.' . app()->getLocale() . '.datetime_format', 'Y-m-d H:i');
 
-        return self::toCarbon($date)?->format($format) ?? __('common.notSet');
+        $carbon = self::toCarbon($date);
+
+        if (!$carbon) {
+            return __('common.notSet');
+        }
+
+        return $carbon->timezone(config('app.timezone', 'Europe/Berlin'))->format($format);
     }
 
     public static function formatNumber(float|int|string|null $number, int $decimals = 1): string
@@ -52,14 +57,18 @@ final class RideWrench
         );
     }
 
-    private static function toCarbon(string|CarbonInterface $date): ?Carbon
+    private static function toCarbon(null|string|CarbonInterface $date): ?CarbonInterface
     {
+        if (!$date) {
+            return null;
+        }
+
         if ($date instanceof CarbonInterface) {
-            return Carbon::instance($date);
+            return $date;
         }
 
         try {
-            return Carbon::parse($date);
+            return \Carbon\Carbon::parse($date, 'UTC');
         } catch (\Throwable) {
             return null;
         }
