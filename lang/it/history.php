@@ -10,4 +10,6 @@ return [
     'note' => 'Nota',
     'emptyTitle' => 'Ancora nessuna cronologia',
     'emptyText' => 'Le attività di manutenzione completate appariranno qui.',
+    'completedAfter' => 'Completato dopo',
+    'days' => '{1} :count giorno|[2,*] :count giorni',
 ];

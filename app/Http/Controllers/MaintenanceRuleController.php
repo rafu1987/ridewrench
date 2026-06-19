@@ -121,7 +121,7 @@ final class MaintenanceRuleController extends Controller
         return redirect('/bikes/' . $ruleRow->bike_id)->with('success', 'ruleDeleted');
     }
 
-    public function done(Request $request, int $rule): RedirectResponse
+    public function done(Request $request, int $rule, MaintenanceService $maintenanceService): RedirectResponse
     {
         $user = $request->user();
 
@@ -131,12 +131,24 @@ final class MaintenanceRuleController extends Controller
             abort(404, __('rules.notFound'));
         }
 
+        $stats = $maintenanceService->statsForRule([
+            'id' => $ruleRow->id,
+            'user_id' => $ruleRow->user_id,
+            'bike_id' => $ruleRow->bike_id,
+            'name' => $ruleRow->name,
+            'rule_kind' => $ruleRow->rule_kind,
+            'distance_km' => $ruleRow->distance_km,
+            'interval_days' => $ruleRow->interval_days,
+        ]);
+
         DB::table('maintenance_events')->insert([
             'user_id' => $user->id,
             'bike_id' => $ruleRow->bike_id,
             'rule_id' => $ruleRow->id,
             'performed_at' => now(),
             'note' => trim((string) $request->input('note', '')),
+            'distance_km' => $stats['distance_km'] ?? null,
+            'elapsed_days' => $stats['elapsed_days'] ?? null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -170,6 +182,8 @@ final class MaintenanceRuleController extends Controller
                 'rule_id' => $ruleRow->id,
                 'performed_at' => $startDate . ' 00:00:00',
                 'note' => __('maintenance.manualStartDate'),
+                'distance_km' => null,
+                'elapsed_days' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

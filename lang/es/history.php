@@ -10,4 +10,6 @@ return [
     'note' => 'Nota',
     'emptyTitle' => 'Aún no hay historial',
     'emptyText' => 'Las tareas de mantenimiento completadas aparecerán aquí.',
+    'completedAfter' => 'Completado después de',
+    'days' => '{1} :count día|[2,*] :count días',
 ];

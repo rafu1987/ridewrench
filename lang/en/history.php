@@ -10,4 +10,6 @@ return [
     'note' => 'Note',
     'emptyTitle' => 'No history yet',
     'emptyText' => 'Completed maintenance tasks will appear here.',
+    'completedAfter' => 'Completed after',
+    'days' => '{1} :count day|[2,*] :count days',
 ];

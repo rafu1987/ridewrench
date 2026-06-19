@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['user_id', 'bike_id', 'rule_id', 'performed_at', 'note'])]
+#[Fillable(['user_id', 'bike_id', 'rule_id', 'performed_at', 'note', 'distance_km', 'elapsed_days'])]
 class MaintenanceEvent extends Model
 {
     use HasFactory;
@@ -31,6 +31,8 @@ class MaintenanceEvent extends Model
     {
         return [
             'performed_at' => 'datetime',
+            'distance_km' => 'float',
+            'elapsed_days' => 'integer',
         ];
     }
 }

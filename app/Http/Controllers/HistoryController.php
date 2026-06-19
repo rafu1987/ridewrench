@@ -20,6 +20,8 @@ class HistoryController extends Controller
                 'maintenance_events.id',
                 'maintenance_events.performed_at',
                 'maintenance_events.note',
+                'maintenance_events.distance_km',
+                'maintenance_events.elapsed_days',
                 'bikes.name as bike_name',
                 'maintenance_rules.name as rule_name',
             ])

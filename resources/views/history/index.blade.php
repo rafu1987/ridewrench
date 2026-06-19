@@ -28,6 +28,7 @@
                                 <th>{{ __('history.date') }}</th>
                                 <th>{{ __('history.bike') }}</th>
                                 <th>{{ __('history.rule') }}</th>
+                                <th>{{ __('history.completedAfter') }}</th>
                                 <th>{{ __('history.note') }}</th>
                             </tr>
                         </thead>
@@ -42,6 +43,25 @@
                                     </td>
                                     <td>
                                         {{ $event->rule_name ?: __('common.notSet') }}
+                                    </td>
+                                    <td>
+                                        @if ($event->distance_km !== null || $event->elapsed_days !== null)
+                                            <div class="small">
+                                                @if ($event->distance_km !== null)
+                                                    <div>
+                                                        {{ \App\Support\RideWrench::formatNumber($event->distance_km, 1) }} km
+                                                    </div>
+                                                @endif
+
+                                                @if ($event->elapsed_days !== null)
+                                                    <div class="text-muted">
+                                                        {{ trans_choice('history.days', $event->elapsed_days, ['count' => $event->elapsed_days]) }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
                                     </td>
                                     <td>
                                         @if (!empty($event->note))
